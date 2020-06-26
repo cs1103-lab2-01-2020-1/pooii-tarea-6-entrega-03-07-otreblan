@@ -16,7 +16,7 @@
 
 cmake_minimum_required(VERSION 3.13.0)
 
-project(tarea6
+project(tarea-6
 	VERSION 0.0.1
 	DESCRIPTION "Tarea 6"
 	HOMEPAGE_URL "https://github.com/cs1103-lab2-01-2020-1/pooii-tarea-6-entrega-03-07-otreblan"
