@@ -16,14 +16,32 @@
 
 #pragma once
 
-struct Node {
-	int data;
-	Node* left;
-	Node* right;
+#include <initializer_list>
 
+struct Node {
+private:
 	Node(int val):
 		data(val),
 		left(nullptr),
 		right(nullptr)
 	{};
+
+public:
+	int data;
+	Node* left;
+	Node* right;
+
+	Node* makeNode(int val)
+	{
+		return new Node(val);
+	}
+
+	~Node()
+	{
+		for(Node* c: {left, right})
+		{
+			if(c != nullptr)
+				delete c;
+		}
+	}
 };

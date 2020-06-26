@@ -48,7 +48,7 @@ void ejercicio1() {
 }
 
 void ejercicio2() {
-	std::cout<<"Construir un arbol a partir de arrays en inorder y preorder\n";
+	std::cout << "Construir un arbol a partir de arrays en inorder y preorder\n";
 	int n = 6;
 
 	int inorder[] = {3, 1, 4, 0, 5, 2};
