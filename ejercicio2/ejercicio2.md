@@ -7,7 +7,7 @@ un arbol e imprimir el postorder traversal.
 Entrada:
 --
 La primera linea consiste de T casos de prueba. La primera linea
-de cada caso de prueba consiste de N, representando el numero de 
+de cada caso de prueba consiste de N, representando el numero de
 elementos en el array. El segundo array y tercera linea de cada
 caso de prueba consiste en inorder y  preorder traversal del arbol.
 
@@ -33,7 +33,7 @@ Ejemplo:
     2
     4
     1 6 8 7
-    1 6 7 8 
+    1 6 7 8
     6
     3 1 4 0 5 2
     0 1 3 4 2 5
@@ -51,4 +51,3 @@ Test Case 2: El arbol construido será
           1   2
         / \  /
        3  4 5
-            

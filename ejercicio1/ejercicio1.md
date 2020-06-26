@@ -16,7 +16,7 @@ hijos nulos.
 
 2.- Ejemplo
 
-![](img1.png?raw=true) 
+![](img1.png?raw=true)
 
 Para el arbol de arriba, la cadena va a ser: 1 2 3 N N 4 6 N 5 N N 7 N
 
@@ -42,7 +42,7 @@ Ejemplo:
     1 3 2
     10 20 30 40 60 50
 
-    
+
     Salida:
     3 1 2
     40 20 60 10 50 30
@@ -50,21 +50,20 @@ Ejemplo:
 Explicación:
 --
 Caso de prueba 1:
- 
+
         1
       /   \
      3     2
-     
+
 Entonces, inorder será: 3 1 2
 
 
 Caso de prueba 2:
- 
+
             10
           /    \
          20    30
         /  \   /
        40  60 50
-     
-Entonces, inorder será: 40 20 60 10 50 30
 
+Entonces, inorder será: 40 20 60 10 50 30
