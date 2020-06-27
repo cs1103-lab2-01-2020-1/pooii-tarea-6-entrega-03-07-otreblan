@@ -14,23 +14,49 @@
 // You should have received a copy of the GNU General Public License
 // along with tarea-6.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
-#include <vector>
+#include <initializer_list>
 
 #include <node.hpp>
 
-enum class Order
+Node::Node(int val):
+	data(val),
+	left(nullptr),
+	right(nullptr)
+{};
+
+bool Node::compare(const Node* _this, const Node* other)
 {
-	inOrder,
-	preOrder
-};
+	if(_this == other)
+	{
+		return true;
+	}
+	else if(_this == nullptr || other == nullptr)
+	{
+		return false;
+	}
+	else
+	{
+		return _this->data == other->data &&
+			compare(_this->left, other->left) &&
+			compare(_this->right, other->right);
+	}
+}
 
-Node* builTreePOSTOrd(std::vector<int>& inorder, std::vector<int>& preorder, int n);
+Node* Node::makeNode(int val)
+{
+	return new Node(val);
+}
 
-Node* makeTree(int n);
-void fillPreOrder(Node* root, std::vector<int>& vec, int& n);
-void fillInOrder(Node* root, std::vector<int>& vec, int& n);
-void fillTree(Node* root, std::vector<int>& vec, Order order);
+Node::~Node()
+{
+	for(Node* c: {left, right})
+	{
+		if(c != nullptr)
+			delete c;
+	}
+}
 
-void printLevels(Node* root);
+bool Node::operator==(const Node& other)
+{
+	return compare(this, &other);
+}

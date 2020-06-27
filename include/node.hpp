@@ -16,32 +16,21 @@
 
 #pragma once
 
-#include <initializer_list>
 
 struct Node {
 private:
-	Node(int val):
-		data(val),
-		left(nullptr),
-		right(nullptr)
-	{};
+	Node(int val);
+
+	static bool compare(const Node* _this, const Node* other);
 
 public:
 	int data;
 	Node* left;
 	Node* right;
 
-	Node* makeNode(int val)
-	{
-		return new Node(val);
-	}
+	static Node* makeNode(int val);
 
-	~Node()
-	{
-		for(Node* c: {left, right})
-		{
-			if(c != nullptr)
-				delete c;
-		}
-	}
+	~Node();
+
+	bool operator==(const Node& other);
 };

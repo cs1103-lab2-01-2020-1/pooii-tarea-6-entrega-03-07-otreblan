@@ -19,4 +19,5 @@ target_sources(${PROJECT_NAME}
 		ejercicios.cpp
 		funciones.cpp
 		main.cpp
+		node.cpp
 )

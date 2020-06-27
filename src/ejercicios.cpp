@@ -51,7 +51,12 @@ void ejercicio2() {
 	std::cout << "Construir un arbol a partir de arrays en inorder y preorder\n";
 	int n = 6;
 
-	int inorder[] = {3, 1, 4, 0, 5, 2};
-	int preorder[] = {0, 1, 3, 4, 2, 5};
+	std::vector<int> inorder = {3, 1, 4, 0, 5, 2};
+	std::vector<int> preorder = {0, 1, 3, 4, 2, 5};
 	Node* root = builTreePOSTOrd(inorder, preorder, n);
+
+	printLevels(root);
+
+	if(root)
+		delete root;
 }
