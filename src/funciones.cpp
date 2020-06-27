@@ -126,19 +126,30 @@ void printLevels(Node* root)
 	if(root == nullptr)
 		return;
 
-	std::queue<std::pair<Node*, int>> levels;
-	levels.push({root, 0});
+	std::queue<Node*> levels;
+	levels.push(root);
+	levels.push(nullptr);
 
-	while(!levels.empty())
+	int level = 1;
+
+	while(levels.size() > 1)
 	{
-		std::pair head = levels.front();
+		Node* head = levels.front();
 
-		std::cerr << head.second << '-' << head.first->data << '\n';
-
-		for(Node* ptr: {head.first->left, head.first->right})
+		if(head == nullptr)
 		{
-			if(ptr != nullptr)
-				levels.push({ptr, head.second+1});
+			levels.push(nullptr);
+			level++;
+		}
+		else
+		{
+			std::cerr << level << '-' << head->data << '\n';
+
+			for(Node* ptr: {head->left, head->right})
+			{
+				if(ptr != nullptr)
+					levels.push(ptr);
+			}
 		}
 		levels.pop();
 	}
