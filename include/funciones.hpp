@@ -17,6 +17,7 @@
 #pragma once
 
 #include <vector>
+#include <string_view>
 
 #include <node.hpp>
 
@@ -25,6 +26,13 @@ enum class Order
 	inOrder,
 	preOrder
 };
+
+Node* buildTree(std::string_view str);
+std::vector<int> inOrder(Node* root);
+void inOrder(std::vector<int>& vec, Node* root);
+int height(Node* root);
+bool isFullTree(Node* root);
+bool isSymmetric(Node* root);
 
 Node* builTreePOSTOrd(std::vector<int>& inorder, std::vector<int>& preorder, int n);
 

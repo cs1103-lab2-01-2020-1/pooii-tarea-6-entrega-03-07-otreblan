@@ -17,8 +17,172 @@
 #include <stack>
 #include <queue>
 #include <iostream>
+#include <sstream>
+#include <optional>
 
 #include <funciones.hpp>
+
+Node* buildTree(std::string_view str)
+{
+	std::istringstream is(str.data());
+
+	std::string buffer;
+
+	is >> buffer;
+
+	if(buffer == "N")
+		return nullptr;
+
+	Node* root = Node::makeNode(std::stoi(buffer));
+
+	std::queue<Node*> nodes;
+	nodes.push(root);
+
+	Node* head_ref = nullptr;
+	int childs = 0;
+
+	while(is >> buffer)
+	{
+		Node* newNode = nullptr;
+		if(buffer != "N")
+			newNode = Node::makeNode(std::stoi(buffer));
+
+		head_ref = nodes.front();
+		switch(childs++)
+		{
+			case 0:
+				head_ref->left = newNode;
+
+				break;
+
+			case 1:
+			default:
+				head_ref->right = newNode;
+
+				nodes.pop();
+				childs = 0;
+				break;
+		}
+
+		if(newNode != nullptr)
+			nodes.push(newNode);
+	}
+
+	return root;
+}
+
+std::vector<int> inOrder(Node* root)
+{
+	std::vector<int> vec;
+
+	inOrder(vec, root);
+
+	return vec;
+}
+
+void inOrder(std::vector<int>& vec, Node* root)
+{
+	if(root == nullptr)
+		return;
+
+	inOrder(vec, root->left);
+	vec.push_back(root->data);
+	inOrder(vec, root->right);
+}
+
+int height(Node* root)
+{
+	if(root == nullptr)
+		return 0;
+
+	return 1+std::max(height(root->left), height(root->right));
+}
+
+bool isFullTree(Node* root)
+{
+	if(root == nullptr)
+		return true;
+
+	int childs = 0;
+	for(Node* ptr: {root->left, root->right})
+	{
+		if(ptr != nullptr)
+			childs++;
+	}
+
+	return ((childs == 2) || (childs == 0)) &&
+		isFullTree(root->left) &&
+		isFullTree(root->right)
+	;
+}
+
+bool isSymmetric(Node* root)
+{
+	if(root == nullptr)
+		return false;
+
+	std::queue<std::optional<Node*>> levels;
+	levels.push(root);
+	levels.push(nullptr);
+
+	bool levelHasChildren = false;
+
+	std::vector<bool> levelMask;
+
+	while(true)
+	{
+		auto head = levels.front();
+
+		if(!head.has_value())
+		{
+			levels.push(std::nullopt);
+
+			levelMask.push_back(0);
+		}
+		else if(head.value() == nullptr)
+		{
+			levels.push(nullptr);
+
+			bool l, r;
+			for(size_t i = 0; i < levelMask.size()/2; ++i)
+			{
+				l = levelMask.at(i);
+				r = levelMask.at(levelMask.size()-1-i);
+
+				if(l != r)
+					return false;
+			}
+
+			levelMask.clear();
+
+			if(levelHasChildren)
+				levelHasChildren = false;
+			else
+				break;
+		}
+		else
+		{
+			//std::cerr << level << '-' << head.value()->data << '\n';
+
+			for(Node* ptr: {head.value()->left, head.value()->right})
+			{
+				if(ptr != nullptr)
+				{
+					levels.push(ptr);
+					levelHasChildren = true;
+				}
+				else
+					levels.push(std::nullopt);
+			}
+
+			levelMask.push_back(1);
+		}
+
+		levels.pop();
+	}
+
+	return true;
+}
 
 Node* builTreePOSTOrd(std::vector<int>& inorder, std::vector<int>& preorder, int n)
 {

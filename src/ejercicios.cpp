@@ -17,34 +17,41 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <iomanip>
 
 #include <ejercicios.hpp>
 #include <funciones.hpp>
 #include <node.hpp>
 
 void ejercicio1() {
-//	int t;
-//	std::string tc;
-//	getline(std::cin, tc);
-//	t = stoi(tc);
-//	while (t--) {
-//		std::string s;
-//		getline(cin, s);
-//		Node* root = buildTree(s); //Implementar buildTree
-//		std::vector<int> res = inOrder(root); //Implementar inOrder
-//		for (size_t i = 0; i < res.size(); i++)
-//			std::cout<<res[i]<<" ";
-//		std::cout << '\n';
-//		std::cout << "The root of the tree is: " << height(root) << '\n';//Implementar height
-//
-//		std::cout<<"Is the tree full? "<< isFullTree(root) << '\n';//Implementar isFullTree
-//
-//		if (isSymmetric(root)) { //Implementar isSymmetric
-//			std::cout << "The tree is Symmetric\n";
-//		} else {
-//			std::cout << "The tree is not Symmetric\n";
-//		}
-//	}
+	int t;
+	std::string tc;
+	getline(std::cin, tc);
+	t = stoi(tc);
+	while (t--) {
+		std::string s;
+		getline(std::cin, s);
+		Node* root = buildTree(s); //Implementar buildTree
+
+		std::vector<int> res = inOrder(root); //Implementar inOrder
+		for (size_t i = 0; i < res.size(); i++)
+			std::cout<<res[i]<<" ";
+		std::cout << '\n';
+		std::cout << "The height of the tree is: " << height(root) << '\n';//Implementar height
+
+		std::cout << std::boolalpha << "Is the tree full? "<< isFullTree(root) << '\n';//Implementar isFullTree
+
+		if (isSymmetric(root)) { //Implementar isSymmetric
+			std::cout << "The tree is Symmetric\n";
+		} else {
+			std::cout << "The tree is not Symmetric\n";
+		}
+
+		std::cout << '\n';
+
+		if(root)
+			delete root;
+	}
 }
 
 void ejercicio2() {
@@ -55,7 +62,7 @@ void ejercicio2() {
 	std::vector<int> preorder = {0, 1, 3, 4, 2, 5};
 	Node* root = builTreePOSTOrd(inorder, preorder, n);
 
-	printLevels(root);
+	//printLevels(root);
 
 	if(root)
 		delete root;
